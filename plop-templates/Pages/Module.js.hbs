@@ -1,0 +1,65 @@
+import React from "react";
+import ApiErrors from "Components/ApiErrors";
+import Loading from "Components/Loading";
+import { Link } from "react-router-dom";
+import { Image } from "Components/Images/Image";
+import Date from "Components/TimeDate/Date";
+import { useTranslation } from "react-i18next";
+import { Route } from "Utils/Route";
+import useActions from "Hooks/useActions"
+import { ApiRoute } from "../Actions/ApiRoute";
+
+/**
+* @returns {*}
+* @constructor
+*/
+const {{pascalCase name}} = () => {
+    /// translation
+    const [_trans] = useTranslation();
+    /// api call
+    const {data , loading , error} = useActions({
+        url : ApiRoute("api{{pascalCase name}}"),
+    })
+
+    return (
+        <div className="relative">
+            <h1>{_trans('{{pascalCase name}}')}</h1>
+            {/*loading component*/}
+            <Loading loading={loading} />
+             {/*handel logic api errors*/}
+             <ApiErrors error={error} />
+            <Link to={ Route("{{camelCase name}}Create") }>
+                {_trans('Create')}
+            </Link>
+            {/*handel from by custom inputs*/}
+            {data.map((row) => (
+            <div className="row" key={`news_`+row.id}>
+                <div className="media">
+                    <Link to={ Route("{{camelCase name}}Details" , {id : row.id}) }>
+                        <Image className="d-flex mr-3" src={row.image} alt={row.title}  />
+                    </Link>
+                    <div className="media-body">
+                        <div className="news-title">
+                            <h2 className="title-small">
+                                <Link to={ Route("{{camelCase name}}Details" , {id : row.id}) }>
+                                    {row.title}
+                                </Link>
+                            </h2>
+                        </div>
+                        <div className="news-auther">
+                             <span className="time">
+                                <Date date={row.created_at} />
+                            </span>
+                            <Link to={ Route("{{camelCase name}}Edit" , {id : row.id}) }>
+                                {_trans('edit')}
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ))}
+        </div>
+    );
+};
+
+export default {{pascalCase name}};

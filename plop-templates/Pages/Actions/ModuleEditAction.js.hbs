@@ -1,0 +1,26 @@
+import RequestProvider from "Providers/Request/RequestProvider";
+import { {{pascalCase name}}EditTransformer } from "../Transformers/{{pascalCase name}}EditTransformer";
+import { ApiRoute } from "./ApiRoute";
+
+/***
+* transform data and send to api
+* @param data
+* @returns {Promise<* | never>}
+* @constructor
+*/
+const {{pascalCase name}}EditAction = (data , id) => {
+    data = {{pascalCase name}}EditTransformer(data)
+    return new RequestProvider({
+        url: ApiRoute('api{{pascalCase name}}Edit')+id,
+        data:data,
+    })
+    .post()
+    .then((response) => {
+        return response;
+    })
+    .catch((response) => {
+        return response;
+    });
+};
+
+export default {{pascalCase name}}EditAction;

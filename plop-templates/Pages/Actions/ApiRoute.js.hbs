@@ -1,0 +1,19 @@
+/***
+ * api routes with name this will make
+ * easy to manipulate urls
+ * @param key
+ * @returns {*}
+ * @constructor
+ */
+export const ApiRoute = (key) =>  {
+  let prefix = '{{prefix}}/'
+
+  let routes = {
+    api{{pascalCase name}} : `${prefix}{{kebabCase name}}`,
+    api{{pascalCase name}}Create : `${prefix}{{kebabCase name}}/create`,
+    api{{pascalCase name}}Edit : `${prefix}{{kebabCase name}}/edit/`,
+    api{{pascalCase name}}Details : `${prefix}{{kebabCase name}}/`,
+  }
+
+  return routes[key];
+}

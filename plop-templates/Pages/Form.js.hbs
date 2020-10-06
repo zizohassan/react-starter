@@ -1,0 +1,64 @@
+import React , { useEffect } from "react";
+import Text from "Components/Inputs/Text";
+import { RequiredMinMAx } from "Utils/Validation";
+import { useTranslation } from "react-i18next";
+import { useForm } from "react-hook-form";
+import History from "Utils/History";
+import { Route } from "Utils/Route";
+import { {{pascalCase name}}CreateTransformer } from "./Transformers/{{pascalCase name}}CreateTransformer";
+import { {{pascalCase name}}EditTransformer } from "./Transformers/{{pascalCase name}}EditTransformer";
+import useActions from "Hooks/useActions";
+import { ApiRoute } from "./Actions/ApiRoute";
+import ApiErrors from "Components/ApiErrors";
+import Loading from "Components/Loading";
+
+/**
+* @param props
+* @returns {*}
+* @constructor
+*/
+const Form = props => {
+    /// form binding and front end errors handling
+    const { register, handleSubmit, errors } = useForm();
+    /// translation
+    const [_trans] = useTranslation();
+    /// use actions hook
+    const { loading, error, response , post } = useActions({});
+
+    /// fire api action
+    const onSubmit = (data) => {
+        if (props.action === "edit") {
+            let options = {url: ApiRoute("api{{pascalCase name}}Edit")+ props.data.id, data : {{pascalCase name}}EditTransformer(data) };
+            post(options)
+        } else {
+            let options = { url: ApiRoute("api{{pascalCase name}}Create"), data : {{pascalCase name}}CreateTransformer(data) };
+            post(options)
+        }
+    };
+
+    /// if response done redirect
+    useEffect(() => {
+        if(response.status){
+            History.push(Route("{{kebabCase name}}"));
+        }
+    } , [response])
+
+    return (
+        <div>
+            {/*loading component*/}
+            <Loading loading={loading} />
+            {/*handel logic api errors*/}
+            <ApiErrors error={error} />
+            {/*handel from by custom inputs*/}
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Text name="title" defaultValue={props.data.title ?? ""} label={_trans("title")} errors={errors}
+                placeholder={_trans("title")} ref={register(RequiredMinMAx(_trans("title"), 2, 30))}/>
+                <button type="submit" className="btn btn-success mr-3">
+                    {props.submitName}
+                </button>
+            </form>
+        </div>
+    );
+};
+
+export default Form;

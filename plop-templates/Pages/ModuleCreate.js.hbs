@@ -1,0 +1,32 @@
+import React , {useState} from "react";
+import ApiErrors from "Components/ApiErrors";
+import Loading from "Components/Loading";
+import { useTranslation } from "react-i18next";
+import Form from "../Form";
+import { ResponseConfig } from "Config/ResponseConfig";
+
+/**
+* @returns {*}
+* @constructor
+*/
+const {{pascalCase name}} = () => {
+    /// default response
+    const [data] = useState(ResponseConfig.Normal);
+    /// Translation
+    const [_trans] = useTranslation();
+
+    return (
+        <div className="relative">
+            <h1>{_trans('{{pascalCase name}}')}</h1>
+            {/*loading component*/}
+            <Loading/>
+            {/*handel logic api errors*/}
+            <ApiErrors/>
+            {/*handel from by custom inputs*/}
+            <Form action="add" submitName={_trans("Store")} data={data}/>
+        </div>
+    );
+};
+
+export default {{pascalCase name}};
+

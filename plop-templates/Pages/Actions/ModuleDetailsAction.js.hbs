@@ -1,0 +1,23 @@
+import RequestProvider from "Providers/Request/RequestProvider";
+import { ApiRoute } from "./ApiRoute";
+
+/***
+* get data from api url will send from component
+* @param options
+* @returns {Promise<* | never>}
+* @constructor
+*/
+const {{pascalCase name}}DetailsAction = (id) => {
+    return new RequestProvider({
+        url: ApiRoute('api{{pascalCase name}}Details')+id,
+    })
+    .get()
+    .then((response) => {
+        return response;
+    })
+    .catch((response) => {
+        return response;
+    });
+};
+
+export default {{pascalCase name}}DetailsAction;

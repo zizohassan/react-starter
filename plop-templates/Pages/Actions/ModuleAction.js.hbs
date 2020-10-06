@@ -1,0 +1,22 @@
+import RequestProvider from "Providers/Request/RequestProvider";
+import { ApiRoute } from "./ApiRoute";
+
+/***
+* get list of rows
+* @returns {Promise<* | never>}
+* @constructor
+*/
+const {{pascalCase name}}Action = () => {
+    return new RequestProvider({
+        url: ApiRoute('api{{pascalCase name}}'),
+    })
+    .get()
+    .then((response) => {
+        return response;
+    })
+    .catch((response) => {
+        return response;
+    });
+};
+
+export default {{pascalCase name}}Action;

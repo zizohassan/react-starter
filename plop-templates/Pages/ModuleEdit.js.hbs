@@ -1,0 +1,37 @@
+import React, { useState } from "react";
+import ApiErrors from "Components/ApiErrors";
+import Loading from "Components/Loading";
+import { useTranslation } from "react-i18next";
+import Form from "../Form";
+import useActions from "Hooks/useActions";
+import { ApiRoute } from "../Actions/ApiRoute";
+
+/***
+* @param props
+* @returns {*}
+* @constructor
+*/
+const {{pascalCase name}}Edit = (props) => {
+    /// set id
+    const [id] = useState(props.match.params.id)
+    /// translation
+    const [_trans] = useTranslation();
+    /// api call
+    const {data , loading , error} = useActions({
+        url : ApiRoute("api{{pascalCase name}}Details") + id,
+    })
+
+    return (
+        <div className="relative">
+            <h1>{_trans("News")}</h1>
+            {/*loading component*/}
+            <Loading loading={loading} />
+            {/*handel logic api errors*/}
+            <ApiErrors error={error} />
+            {/*handel form*/}
+            <Form action="edit" submitName={_trans("update")} data={data} />
+        </div>
+    );
+};
+
+export default {{pascalCase name}}Edit;

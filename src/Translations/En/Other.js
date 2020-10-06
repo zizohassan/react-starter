@@ -1,0 +1,16 @@
+export const OtherEn = {
+  "App" : "Appِ",
+  "Home" :"Home",
+  "Sign In" : "Sign In",
+  "Sign Up" :   "Sign Up",
+  "not-valid-email" : " Email address is required",
+  "email-is-required" : "Email address is required",
+  "email-address-length" : "Email address must be more less 50",
+  "phone-not-valid" : "Phone Number is required",
+  "more-than" : "must be more than",
+  "less-than" : " must be more than ",
+  "required" : " is required",
+  "required-password" : "Password is required",
+  "more-than-password"  :"Password must be more than 6",
+  "less-than-password" : "Password must be more less 50"
+}

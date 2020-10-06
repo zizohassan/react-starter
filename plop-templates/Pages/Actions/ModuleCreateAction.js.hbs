@@ -1,0 +1,26 @@
+import RequestProvider from "Providers/Request/RequestProvider";
+import { {{pascalCase name}}CreateTransformer } from "../Transformers/{{pascalCase name}}CreateTransformer";
+import { ApiRoute } from "./ApiRoute";
+
+/***
+* transform data and send to api
+* @param data
+* @returns {Promise<* | never>}
+* @constructor
+*/
+const {{pascalCase name}}CreateAction = (data) => {
+    data = {{pascalCase name}}CreateTransformer(data)
+    return new RequestProvider({
+        url: ApiRoute('apiNewsCreate'),
+        data:data,
+    })
+    .post()
+    .then((response) => {
+        return response;
+    })
+    .catch((response) => {
+        return response;
+    });
+};
+
+export default {{pascalCase name}}CreateAction;

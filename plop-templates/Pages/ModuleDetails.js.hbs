@@ -1,0 +1,55 @@
+import React, { useState } from "react";
+import ApiErrors from "Components/ApiErrors";
+import Loading from "Components/Loading";
+import { Image } from "Components/Images/Image";
+import Date from "Components/TimeDate/Date";
+import { useTranslation } from "react-i18next";
+import useActions from "Hooks/useActions"
+import { ApiRoute } from "../Actions/ApiRoute";
+
+/***
+* @param props
+* @returns {*}
+* @constructor
+*/
+const {{pascalCase name}} = (props) => {
+    /// set id
+    const [id] = useState(props.match.params.id);
+    /// translation
+    const [_trans] = useTranslation();
+    /// api call
+    const {data , loading , error} = useActions({
+        url : ApiRoute("api{{pascalCase name}}Details")+id,
+    })
+
+
+return (
+        <div className="relative">
+            <h1>{_trans('{{pascalCase name}}')}</h1>
+            {/*loading component*/}
+            <Loading loading={loading} />
+            {/*handel logic api errors*/}
+            <ApiErrors error={error} />
+            {/*handel from by custom inputs*/}
+            <div className="row">
+                <div className="">
+                    <Image  src={data.image} alt={data.title} className="img-fluid d-flex"/>
+                    <div className="media-body">
+                        <div className="news-title">
+                            <h2 className="title-small">
+                                {data.title}
+                            </h2>
+                        </div>
+                        <div className="news-auther">
+                        <span className="time">
+                            <Date date={data.created_at} />
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default {{pascalCase name}};
